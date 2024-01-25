@@ -374,95 +374,91 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 
 
 
-				<tr style="font-size: 13px;">
-					<th>Color</th>
-					<th>Size</th>
-					<th>Variation Id</th>
-					<th></th>
-					<th>Quantity</th>
-				</tr>
+				<div class="product_variations_supplierx">
+					<p id="variance_supplierx">Product variations</p>
+				</div>
+
+				<table class="product_variance_supplierx" style="display: none;">
+					<tr style="font-size: 13px;">
+						<th>Color</th>
+						<th>Size</th>
+						<th></th>
+						<th>Quantity</th>
+					</tr>
+
+					<?php
+
+					if (is_product()) {
+
+						if ($product->is_type('variable')) {
+
+							global $product;
+
+							// Get product variations
+							$variations = $product->get_available_variations();
+
+							if (!empty($variations)) {
+
+								// Output the table
+								foreach ($variations as $variation) :
+									$variation_id = $variation['variation_id'];
+									$attributes = $variation['attributes'];
+
+									// Output the table row
+					?>
+									<tr style="font-size: 12px;">
+										<td><?php echo esc_html(ucwords($attributes['attribute_pa_color'])); ?></td>
+										<td><?php echo esc_html(ucwords($attributes['attribute_pa_size'])); ?></td>
+
+										<td style="display: none;"><?php echo esc_html($variation_id);
+																	?></td>
+
+
+										<td><input type="hidden" name="product_id" value="<?php echo $product->get_ID(); ?>"></td>
+
+
+
+										<!-- <td><input type="text" class="variation-quantity" name="<?php //echo esc_attr($attributes['attribute_pa_color'] . '_' . $attributes['attribute_pa_size']); 
+																										?>" id="" placeholder="1"></td> -->
+
+										<td><input type="text" class="variation-quantity" name="<?php echo esc_attr($attributes['attribute_pa_color'] . '_' . $attributes['attribute_pa_size']); ?>" placeholder="1" style="max-width: 100px;"></td>
 
 
 
 
-				<?php
-				// if (is_product()) {
-				// 	global $product;
-
-				// 	if ($product->is_type('variable')) {
-				// 		// This is a variable product page
-				// 		echo 'Variable Product Page';
-				// 	} elseif ($product->is_type('simple')) {
-				// 		// This is a simple product page
-				// 		echo 'Simple Product Page';
-				// 	}
-				// }
-				?>
-
-
-
-				<?php
-
-				if (is_product()) {
-
-					if ($product->is_type('variable')) {
-
-						global $product;
-
-						// Get product variations
-						$variations = $product->get_available_variations();
-
-						if (!empty($variations)) {
-
-							// Output the table
-							foreach ($variations as $variation) :
-								$variation_id = $variation['variation_id'];
-								$attributes = $variation['attributes'];
-
-								// Output the table row
-				?>
-								<tr style="font-size: 12px;">
-									<td><?php echo esc_html(ucwords($attributes['attribute_pa_color'])); ?></td>
-									<td><?php echo esc_html(ucwords($attributes['attribute_pa_size'])); ?></td>
-
-									<td><?php echo esc_html($variation_id); ?></td>
-
-
-									<!-- <td><input type="text" name="<?php //echo esc_attr($attributes['attribute_pa_color'] . '_' . $attributes['attribute_pa_size']); 
-																		?>" id="" placeholder="1"></td> -->
-
-
-									<td><input type="hidden" name="product_id" value="<?php echo $product->get_ID(); ?>"></td>
-
-
-
-									<td><input type="text" class="variation-quantity" name="<?php echo esc_attr($attributes['attribute_pa_color'] . '_' . $attributes['attribute_pa_size']); ?>" id="" placeholder="1"></td>
-
-
-
-								</tr>
-				<?php
-							endforeach;
-						} else {
-							// Output a message if there are no variations
-							echo '<tr><td colspan="3">No variations available for this product.</td></tr>';
+									</tr>
+					<?php
+								endforeach;
+							} else {
+								// Output a message if there are no variations
+								echo '<tr><td colspan="3">No variations available for this product.</td></tr>';
+							}
 						}
 					}
-				}
+
+					?>
+				</table>
 
 
-
-				?>
 
 
 
 
 
 			</tbody>
+
 		</table>
 
+		<!-- <div class="product_variations_supplierx">
+			<p id="variance_supplierx">Product variations</p>
+		</div> -->
 
-		<a href="http://localhost/supplierx/cart/" ajax_url=<?php echo admin_url('admin-ajax.php'); ?> class="addToCartButton_x" id="addToCartButton_x">Add to cart</a>
+
+
+		<a href="<?php echo home_url('/cart'); ?>" ajax_url="<?php echo admin_url('admin-ajax.php'); ?>" class="addToCartButton_x" id="addToCartButton_x">Add to cart</a>
+
+
+
 
 
 
@@ -505,18 +501,6 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 
 		<?php }
 		} ?>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<?php endif; ?>

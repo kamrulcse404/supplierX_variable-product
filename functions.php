@@ -253,19 +253,13 @@ function supplierX_ajax_kh()
 
             foreach ($variations_data as $variation) {
                 if (class_exists('WooCommerce')) {
-
                     $prod_id = $variation['product_id'];
                     $quantity = $variation['quantity'];
                     $variation_id = $variation['variation_id'];
-                    // print_r($prod_id);
-                    // echo "<br>";
-                    // print_r($quantity);
-                    // echo "<br>";
-                    // print_r($variation_id);
-                    // echo "<br>";
 
-
-                    WC()->cart->add_to_cart($prod_id, $quantity, $variation_id);
+                    if (!empty($quantity)) {
+                        WC()->cart->add_to_cart($prod_id, $quantity, $variation_id);
+                    }
                 }
             }
         }
@@ -314,7 +308,8 @@ function suplierX_add_code_to_footer()
                 });
 
                 // alert(JSON.stringify(variationsData));
-                alert('Button clicked!');
+                // alert('Button clicked!');
+                // alert(variationsData);
 
                 $.ajax({
                     type: 'POST',
@@ -333,6 +328,13 @@ function suplierX_add_code_to_footer()
                 });
             });
         });
+
+
+        jQuery(document).ready(function($) {
+            $("#variance_supplierx").click(function() {
+                $(".product_variance_supplierx").slideToggle(400);
+            });
+        });
     </script>
 
     <style>
@@ -347,6 +349,27 @@ function suplierX_add_code_to_footer()
         }
 
         a#addToCartButton_x:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .product_variations_supplierx {
+            margin-bottom: 8px;
+        }
+
+        #variance_supplierx {
+            border: 1px solid;
+            max-width: 130px;
+            text-align: center;
+            font-size: 13px;
+            padding: 5px 2px;
+            border-radius: 10px;
+            cursor: pointer;
+
+            transition: background-color .5s, color .5s;
+        }
+
+        #variance_supplierx:hover {
             background-color: black;
             color: white;
         }
