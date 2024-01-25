@@ -332,7 +332,7 @@ function suplierX_add_code_to_footer()
 
         jQuery(document).ready(function($) {
             $("#variance_supplierx").click(function() {
-                $(".product_variance_supplierx").slideToggle(800);
+                $(".product_variance_supplierx").slideToggle(400);
             });
         });
     </script>
@@ -345,6 +345,7 @@ function suplierX_add_code_to_footer()
             text-align: center;
             border-radius: 30px;
             font-size: 12px;
+            font-weight: bold;
             transition: background-color 1s, color 1s;
         }
 
@@ -365,6 +366,7 @@ function suplierX_add_code_to_footer()
             padding: 5px 2px;
             border-radius: 10px;
             cursor: pointer;
+            font-weight: bold;
 
             transition: background-color .5s, color .5s;
         }

@@ -473,7 +473,8 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 		<?php
 		if (is_product()) {
 			global $product;
-			if ($product->is_type('simple')) {  ?>
+			if (!$product->is_type('simple')) { ?>
+
 
 				<div class="single_variation_wrap">
 					<?php
@@ -499,8 +500,20 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 				</div>
 
 
+				<style>
+					.single_variation_wrap {
+						display: none !important;
+					}
+				</style>
 		<?php }
-		} ?>
+		}
+		?>
+
+
+
+
+
+
 
 
 	<?php endif; ?>
