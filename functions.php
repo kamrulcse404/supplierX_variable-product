@@ -332,7 +332,7 @@ function suplierX_add_code_to_footer()
 
         jQuery(document).ready(function($) {
             $("#variance_supplierx").click(function() {
-                $(".product_variance_supplierx").slideToggle(400);
+                $(".product_variance_supplierx").slideToggle(800);
             });
         });
     </script>
